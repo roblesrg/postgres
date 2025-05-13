@@ -1,0 +1,23 @@
+services:
+  database:
+    image: postgres:16.6
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - pg_database-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - db-server
+    tty: true
+
+volumes:
+  pg_database-data:
+
+
+networks:
+  db-server:
+    driver: bridge
